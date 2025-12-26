@@ -2,10 +2,19 @@ package com.belanja.ui;
 
 import com.belanja.model.Barang;
 import com.belanja.service.BelanjaService;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class FormBarangPanel extends JPanel {
+
+    private static final Color COKLAT_MUDA = new Color(245, 222, 179);
+
+    private static final Font FONT_LABEL = new Font("Arial", Font.BOLD, 14);
+    private static final Font FONT_INPUT = new Font("Arial", Font.BOLD, 14);
+    private static final Font FONT_BUTTON = new Font("Arial", Font.BOLD, 14);
+    private static final Font FONT_TITLE = new Font("Arial", Font.BOLD, 22);
+
     private MainFrame parent;
     private BelanjaService belanjaService;
     private JTextField txtNama, txtJumlah, txtHarga;
@@ -22,57 +31,105 @@ public class FormBarangPanel extends JPanel {
     private void initUI() {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setBackground(COKLAT_MUDA);
 
-        JLabel titleLabel = new JLabel("➕ TAMBAH BARANG BARU");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        JLabel titleLabel = new JLabel("TAMBAH BARANG BARU");
+        titleLabel.setFont(FONT_TITLE);
+        titleLabel.setForeground(Color.BLACK);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.NORTH);
 
         JPanel formPanel = new JPanel(new GridLayout(6, 2, 15, 15));
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        formPanel.setBackground(COKLAT_MUDA);
 
-        formPanel.add(new JLabel("Nama Barang*:"));
-        txtNama = new JTextField();
+        formPanel.add(createLabel("Nama Barang:"));
+        txtNama = createTextField();
         formPanel.add(txtNama);
 
-        formPanel.add(new JLabel("Jumlah*:"));
+        formPanel.add(createLabel("Jumlah:"));
         JPanel jumlahPanel = new JPanel(new BorderLayout());
-        txtJumlah = new JTextField("1");
+        jumlahPanel.setBackground(COKLAT_MUDA);
+
+        txtJumlah = createTextField();
+        txtJumlah.setText("1");
         jumlahPanel.add(txtJumlah, BorderLayout.CENTER);
-        comboSatuan = new JComboBox<>(new String[]{"kg", "liter", "buah", "bungkus", "pack", "dus"});
+
+        comboSatuan = createComboBox(new String[]{
+                "kg", "liter", "buah", "bungkus", "pack", "dus"
+        });
         jumlahPanel.add(comboSatuan, BorderLayout.EAST);
         formPanel.add(jumlahPanel);
 
-        formPanel.add(new JLabel("Harga per Satuan (Rp)*:"));
-        txtHarga = new JTextField();
+        formPanel.add(createLabel("Harga per Satuan (Rp):"));
+        txtHarga = createTextField();
         formPanel.add(txtHarga);
 
-        formPanel.add(new JLabel("Prioritas*:"));
-        comboPrioritas = new JComboBox<>(new String[]{"WAJIB", "PENTING", "BISA NANTI"});
+        formPanel.add(createLabel("Prioritas:"));
+        comboPrioritas = createComboBox(new String[]{
+                "WAJIB", "PENTING", "BISA NANTI"
+        });
         formPanel.add(comboPrioritas);
 
-        formPanel.add(new JLabel("Toko*:"));
-        comboToko = new JComboBox<>(new String[]{"PASAR", "SWALAYAN", "ONLINE", "TOKO KELONTONG"});
+        formPanel.add(createLabel("Toko:"));
+        comboToko = createComboBox(new String[]{
+                "PASAR", "SWALAYAN", "ONLINE", "TOKO KELONTONG"
+        });
         formPanel.add(comboToko);
 
-        formPanel.add(new JLabel("* wajib diisi"));
-        formPanel.add(new JLabel("ID akan dibuat otomatis"));
+        formPanel.add(createLabel("* wajib diisi"));
+        formPanel.add(createLabel("ID akan dibuat otomatis"));
+
         add(formPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        JButton btnSimpan = new JButton("💾 Simpan Barang");
+        buttonPanel.setBackground(COKLAT_MUDA);
+
+        JButton btnSimpan = createButton("💾 Simpan Barang");
         btnSimpan.addActionListener(e -> simpanBarang());
 
-        JButton btnReset = new JButton("🔄 Reset Form");
+        JButton btnReset = createButton("🔄 Reset Form");
         btnReset.addActionListener(e -> resetForm());
 
-        JButton btnKembali = new JButton("← Kembali ke Dashboard");
+        JButton btnKembali = createButton("← Kembali ke Dashboard");
         btnKembali.addActionListener(e -> parent.showDashboard());
 
         buttonPanel.add(btnSimpan);
         buttonPanel.add(btnReset);
         buttonPanel.add(btnKembali);
+
         add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private JLabel createLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(FONT_LABEL);
+        label.setForeground(Color.BLACK);
+        return label;
+    }
+
+    private JTextField createTextField() {
+        JTextField tf = new JTextField();
+        tf.setFont(FONT_INPUT);
+        tf.setForeground(Color.BLACK);
+        tf.setBackground(Color.WHITE);
+        return tf;
+    }
+
+    private JComboBox<String> createComboBox(String[] data) {
+        JComboBox<String> cb = new JComboBox<>(data);
+        cb.setFont(FONT_INPUT);
+        cb.setForeground(Color.BLACK);
+        cb.setBackground(Color.WHITE);
+        return cb;
+    }
+
+    private JButton createButton(String text) {
+        JButton btn = new JButton(text);
+        btn.setFont(FONT_BUTTON);
+        btn.setForeground(Color.BLACK);
+        btn.setBackground(new Color(222, 184, 135));
+        return btn;
     }
 
     public void resetForm() {
@@ -109,9 +166,13 @@ public class FormBarangPanel extends JPanel {
 
             String result;
             if (currentId == null) {
-                result = belanjaService.tambahBarang(nama, jumlah, satuan, harga, prioritas, toko);
+                result = belanjaService.tambahBarang(
+                        nama, jumlah, satuan, harga, prioritas, toko
+                );
             } else {
-                result = belanjaService.updateBarang(currentId, nama, jumlah, satuan, harga, prioritas, toko);
+                result = belanjaService.updateBarang(
+                        currentId, nama, jumlah, satuan, harga, prioritas, toko
+                );
             }
 
             if (result.startsWith("✅")) {
@@ -123,9 +184,11 @@ public class FormBarangPanel extends JPanel {
             }
 
         } catch (NumberFormatException e) {
-            parent.showMessage("Jumlah dan harga harus angka!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            parent.showMessage("Jumlah dan harga harus angka!",
+                    "Input Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            parent.showMessage("Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            parent.showMessage("Error: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
