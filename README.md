@@ -1,12 +1,38 @@
 🛒 Catatan Belanja Bulanan
-📌 Deskripsi
+📌 Deskripsi Program
 
-Catatan Belanja Bulanan merupakan aplikasi desktop berbasis Java Swing yang dirancang untuk membantu pengguna dalam mencatat, mengelola, dan memantau rencana belanja bulanan secara lebih terstruktur. Aplikasi ini memungkinkan pengguna untuk menyimpan daftar barang belanja lengkap dengan informasi jumlah, satuan, harga, prioritas, dan tempat pembelian.
+Catatan Belanja Bulanan adalah aplikasi desktop berbasis Java Swing yang digunakan untuk mencatat dan mengelola rencana belanja bulanan secara terstruktur. Program ini memungkinkan pengguna menyimpan data barang belanja lengkap dengan jumlah, satuan, harga, prioritas, dan toko, serta memantau kondisi anggaran secara otomatis.
 
-Aplikasi ini juga menyediakan fitur pengelolaan anggaran bulanan, sehingga pengguna dapat mengetahui total biaya belanja, sisa dana yang tersedia, serta kondisi keuangan secara umum. Setiap barang dapat ditandai apakah sudah dibeli atau belum, sehingga pengguna dapat memantau progres belanja dengan lebih mudah.
+Aplikasi ini dirancang untuk membantu pengguna mengontrol pengeluaran dengan menampilkan total biaya belanja, sisa anggaran, dan status barang (sudah dibeli atau belum). Selain itu, program menyediakan fitur pencarian, pengurutan, dan laporan belanja agar data mudah dianalisis dan dievaluasi.
 
-Dari sisi pengembangan, aplikasi ini menerapkan konsep Object-Oriented Programming (OOP) secara menyeluruh, seperti penggunaan class, object, encapsulation, dan pemisahan tanggung jawab antar package. Struktur aplikasi dibagi menjadi beberapa package utama, yaitu model untuk representasi data barang, service untuk logika bisnis dan pengolahan data, ui untuk antarmuka pengguna, serta util untuk kebutuhan validasi dan pengelolaan file.
+🎯 Tujuan Pembuatan Program
 
-Aplikasi Catatan Belanja Bulanan dilengkapi dengan fitur pencarian dan pengurutan data berdasarkan nama, harga, dan prioritas, serta dashboard yang menampilkan ringkasan belanja secara visual. Selain itu, tersedia pula menu laporan yang menampilkan statistik belanja dan distribusi pengeluaran per toko, sehingga pengguna dapat melakukan evaluasi belanja bulanan dengan lebih baik.
+Program ini dibuat dengan tujuan:
 
-Aplikasi ini dibuat sebagai tugas pemrograman lanjutan dan dapat digunakan sebagai sarana pembelajaran dalam memahami penerapan Java Swing, manajemen data, serta penerapan konsep OOP dalam pengembangan aplikasi desktop sederhana namun fungsional.
+Membantu pengguna mencatat dan mengelola daftar belanja bulanan secara rapi dan sistematis.
+
+Mengontrol anggaran belanja dengan perhitungan total biaya dan sisa dana secara otomatis.
+
+Membantu pengguna menentukan prioritas belanja melalui kategori WAJIB, PENTING, dan BISA NANTI.
+
+Menyediakan ringkasan dan laporan belanja sebagai bahan evaluasi pengeluaran bulanan.
+
+Menjadi media pembelajaran penerapan Object-Oriented Programming (OOP) dan Java Swing GUI.
+
+✨ Fitur Utama
+
+Menambahkan, mengubah, dan menghapus data barang belanja
+
+Penandaan barang yang sudah dibeli
+
+Pencarian barang berdasarkan nama atau toko
+
+Pengurutan data berdasarkan nama, harga, dan prioritas
+
+Pengelolaan anggaran bulanan dan perhitungan sisa dana
+
+Dashboard ringkasan belanja
+
+Laporan belanja dan distribusi pengeluaran per toko
+
+Penyimpanan data ke file dan fitur backup data
